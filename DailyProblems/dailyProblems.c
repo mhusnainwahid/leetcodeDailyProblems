@@ -86,3 +86,57 @@ int findFinalValue(int* nums, int numsSize, int original){
     return original;
 
 }
+
+// // 1930
+int countPalindromicSubsequence(char* s);
+int main(){
+    char s[5] = "aabca";
+    int result;
+    result = countPalindromicSubsequence(s);
+    return 0;
+}
+int countPalindromicSubsequence(char* s) {
+    int count = 0;
+    char ch;
+    for(ch = 'a'; ch <= 'z'; ch++) {
+        int left = -1, right = -1;
+        int i;
+        for(i = 0; s[i] != '\0'; i++) {
+            if(s[i] == ch) {
+                if(left == -1) left = i;
+                right = i;
+            }
+        }
+        if(left != -1 && right != -1 && left < right) {
+            int freq[26] = {0};
+            int i,k;
+            for(i = left + 1; i < right; i++) {
+                freq[s[i] - 'a'] = 1;
+            }
+            for(k = 0; k < 26; k++) {
+                if(freq[k] == 1) count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+// 3190
+int minimumOperations(int* nums, int numsSize);
+int main(){
+    int nums[4] = {1,2,3,4};
+    int result = minimumOperations(nums,4);
+    printf("%d" , result);
+    return 0;
+}
+int minimumOperations(int* nums, int numsSize) {
+    int i, count = 0;
+    for (i = 0; i < numsSize; i++) {
+        int rem = nums[i] % 3;
+        if (rem == 1 || rem == 2) {
+            count += 1;
+        }
+    }
+    return count;
+}
